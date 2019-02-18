@@ -5,7 +5,7 @@ import pytesseract
 
 
 
-def captch_ex(img):
+def parse_text(img):
     img2gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     ret, mask = cv2.threshold(img2gray, 180, 255, cv2.THRESH_BINARY)
     image_final = cv2.bitwise_and(img2gray, img2gray, mask=mask)
@@ -49,7 +49,7 @@ cap = cv2.VideoCapture(0)
 while True:
     ret, image = cap.read()
     if image.any():
-        rect = captch_ex(image)
+        rect = parse_text(image)
         cv2.imshow('img', rect)
     else:
         print("video not captured")
