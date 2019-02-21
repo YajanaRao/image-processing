@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Yajana</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!--
+  <link rel="stylesheet" href="../static/js/bootstrap.min.css">
+  <script src="../static/js/jquery.min.js"></script>
+  <script src="../static/js/bootstrap.min.js"></script>
+  -->
+
+	<style>
+
+		/* Add a gray background color and some padding to the footer */
+		footer {
+			background-color: #f2f2f2;
+			padding: 25px;
+		}
+
+		.mt-4 {
+			margin-top: 4px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Yajana</a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Gallery</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" data-toggle="modal" data-target="#myLoginModal"><span
+								class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid text-center mt-4">
+		<img id="img-fluid" src="{{ url_for('video_feed') }}">
+		<h6 id="text" class="text-center">Text</h6>
+	</div>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="myLoginModal" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Login</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="tenant">Tenant:</label>
+						<input type="text" class="form-control" id="tenant">
+						<label for="usr">Name:</label>
+						<input type="text" class="form-control" id="usr">
+						<label for="pwd">Password:</label>
+						<input type="password" class="form-control" id="pwd">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Login</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<footer class="container-fluid text-center">
+		<p>Made by Yajana</p>
+	</footer>
+	<script>
+		$(document).ready(function () {
+			setInterval(fetchText, 1000);
+		});
+		function fetchText() {
+			$.ajax({
+				url: '/text',
+				type: 'get',
+				success: function (data) {
+					$('#text').text(data)
+				}
+			});
+		}
+	</script>
+
+</body>
+
+</html>
