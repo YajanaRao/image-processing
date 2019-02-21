@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 import pytesseract
 import imutils
 
@@ -18,8 +17,8 @@ class Camera(object):
 
     def get_frame(self):
         success, image = self.video.read()
+        return image
         # We are using Motion JPEG, but OpenCV defaults to capture raw images,
         # so we must encode it into JPEG in order to correctly display the
         # video stream.
-        ret, jpeg = cv2.imencode('.jpg', image)
-        return jpeg.tobytes()
+        
